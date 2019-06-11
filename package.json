@@ -1,0 +1,16 @@
+{
+  "name": "yargs-customized",
+  "version": "1.0.3",
+  "description": "A customized version of yargs",
+  "main": "yargs-customized.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hnw/yargs-customized.git"
+  },
+  "author": "hnw",
+  "license": "MIT",
+  "dependencies": {
+    "yargs": ">=13.0.0"
+  }
+}
