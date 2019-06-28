@@ -2,17 +2,16 @@
 
 /*
  * Argvオブジェクトはトリッキーな実装で、
- * Argv()でYargsオブジェクトのコンストラクタとして動作しつつ、
- * Argv.method()でYargs(process.argv.slice(2))のメソッドを呼ぶ。
- * またYargs.argvはgetter関数が定義されている。
+ * Argv()と呼ばれたらYargsオブジェクトのファクトリとして動作し、
+ * Argv.method()ならYargs(...(process.argv.slice(2))).method()として動作する。
+ * さらに、Yargs.argvはgetter関数が定義されている。
+ * これらを全てwrapする。
  */
 
 const origArgv = require('yargs');
-function Argv() {
-  const origYargs = origArgv.apply(null, arguments);
-  return customizedYargs(origYargs);
+const myArgv = (...args) => {
+  return customizedYargs(origArgv(...args));
 }
-const myArgv = Argv;
 
 // add default settings into all Yargs object which is returned from Argv methods/properties
 Object.keys(origArgv).forEach((key) => {
@@ -25,14 +24,14 @@ Object.keys(origArgv).forEach((key) => {
     });
   } else if (typeof origArgv[key] === 'function') {
     const origMethod = origArgv[key];
-    myArgv[key] = function () {
+    myArgv[key] = (...args) => {
       const myYargs = customizedYargs(origArgv);
-      return origMethod.apply(myYargs, arguments);
+      return origMethod.apply(myYargs, args);
     }
   }
 })
 
-function customizedYargs(yargs) {
+const customizedYargs = (yargs) => {
   /* customized behavior */
   return yargs
     .parserConfiguration({'duplicate-arguments-array': false}) // あとから指定したオプションが勝つ
