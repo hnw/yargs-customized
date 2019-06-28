@@ -9,11 +9,17 @@
  */
 
 const origArgv = require('yargs');
+
+/*
+ * OrigArgvのファクトリを上書き
+ */
 const myArgv = (...args) => {
   return customizedYargs(origArgv(...args));
 }
 
-// add default settings into all Yargs object which is returned from Argv methods/properties
+/*
+ * OrigArgvの全プロパティについて、customizedYargsを適用した関数として上書き
+ */
 Object.keys(origArgv).forEach((key) => {
   if (key === 'argv') {
     Object.defineProperty(myArgv, 'argv', {
@@ -31,6 +37,10 @@ Object.keys(origArgv).forEach((key) => {
   }
 })
 
+/*
+ * ArgvオブジェクトまたはYargsオブジェクトを受け取り
+ * 自分好みのオプション設定を行ったYargsオブジェクトを返す。
+ */
 const customizedYargs = (yargs) => {
   /* customized behavior */
   return yargs
