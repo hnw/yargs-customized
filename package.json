@@ -1,6 +1,6 @@
 {
   "name": "@hnw/yargs-customized",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A customized version of yargs",
   "main": "yargs-customized.js",
   "private": false,
