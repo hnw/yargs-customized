@@ -16,7 +16,7 @@ or write a `package.json` file as follows, then run `npm i`.
 {
   "name": "test_app",
   "dependencies": {
-    "my-yargs": "hnw/yargs-customized"
+    "@hnw/yargs-customized": "*"
   }
 }
 ```

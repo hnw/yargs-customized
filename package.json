@@ -1,9 +1,9 @@
 {
-  "name": "yargs-customized",
-  "version": "1.0.4",
+  "name": "@hnw/yargs-customized",
+  "version": "1.0.5",
   "description": "A customized version of yargs",
   "main": "yargs-customized.js",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/hnw/yargs-customized.git"
