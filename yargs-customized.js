@@ -1,11 +1,24 @@
 'use strict'
 
 /*
+ * yargs-customized: カスタム版のyargs
+ *
+ * オリジナルとの差分
+ *
+ * 1. デフォルトオプションを変更
+ *
+ */
+
+/*
+ * yargsのArgvオブジェクトの特殊性について
+ *
  * Argvオブジェクトはトリッキーな実装で、
  * Argv()と呼ばれたらYargsオブジェクトのファクトリとして動作し、
- * Argv.method()ならYargs(...(process.argv.slice(2))).method()として動作する。
- * さらに、Yargs.argvはgetter関数が定義されている。
- * これらを全てwrapする。
+ * Argv.method()と呼ばれた場合は
+ * Yargs(...(process.argv.slice(2))).method()として動作する。
+ * さらに、Yargs.argvにはgetter関数が定義されている。
+ *
+ * そのため、挙動を変更するにはこれらの関数を全てwrapする必要がある。
  */
 
 const origArgv = require('yargs');
